@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<robot name="dji_m100" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find dji_m100_description)/urdf/dji_m100_base.xacro" />
+    <xacro:include filename="$(find dji_m100_description)/urdf/gimbal.urdf.xacro" />
+    <xacro:dji_m100_base_macro />
+    <xacro:dji_m100_gimbal />
+</robot>
+

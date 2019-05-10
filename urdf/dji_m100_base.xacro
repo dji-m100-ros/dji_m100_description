@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="pi" value="3.1415926535897931" />
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+
+ <!-- Base quadrotor link -->
+  <xacro:macro name="dji_m100_base_macro">
+    <link name="base_link">
+      <inertial>
+        <mass value="1.477" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.11152" ixy="0.0" ixz="0.0" iyy="0.11152" iyz="0.0" izz="0.218" />
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://dji_m100_description/meshes/dji_m100/dji_m100.dae"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://dji_m100_description/meshes/dji_m100/dji_m100.stl"/>
+        </geometry>
+      </collision>
+      <gravity>1</gravity>
+    </link>
+    <!-- Ground truth plugin for debugging purposes -->
+    <!--gazebo>
+        <plugin name="groundtruth_sim" filename="libgazebo_ros_p3d.so">
+            <updateRate>100.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>ground_truth/state</topicName>
+            <gaussianNoise>0.0</gaussianNoise>
+            <frameName>$(arg world_frame)</frameName>
+        </plugin>
+    </gazebo-->
+    <!-- DJI Gazebo Controller Plugin -->
+    <gazebo>
+      <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control.so'>
+        <bodyName>base_link</bodyName>
+        <imuTopic>dji_sdk/imu</imuTopic>
+        <rollpitchProportionalGain>10.0</rollpitchProportionalGain>
+        <rollpitchDifferentialGain>5.0</rollpitchDifferentialGain>
+        <rollpitchLimit>0.5</rollpitchLimit>
+        <yawProportionalGain>2.0</yawProportionalGain>
+        <yawDifferentialGain>1.0</yawDifferentialGain>
+        <yawLimit>1.5</yawLimit>
+        <velocityXYProportionalGain>5.0</velocityXYProportionalGain>
+        <velocityXYDifferentialGain>2.3</velocityXYDifferentialGain>
+        <velocityXYLimit>2</velocityXYLimit>
+        <velocityZProportionalGain>5.0</velocityZProportionalGain>
+        <velocityZDifferentialGain>1.0</velocityZDifferentialGain>
+        <velocityZLimit>-1</velocityZLimit>
+        <positionXYProportionalGain>1.1</positionXYProportionalGain>
+        <positionXYDifferentialGain>0.0</positionXYDifferentialGain>
+        <positionXYIntegralGain>0.0</positionXYIntegralGain>
+        <positionXYLimit>5</positionXYLimit>
+        <positionZProportionalGain>1.0</positionZProportionalGain>
+        <positionZDifferentialGain>0.2</positionZDifferentialGain>
+        <positionZLimit>-1</positionZLimit>
+        <maxForce>30</maxForce>
+        <motionSmallNoise>0.0</motionSmallNoise>
+        <motionDriftNoise>0.0</motionDriftNoise>
+        <motionDriftNoiseTime>0.0</motionDriftNoiseTime>
+      </plugin>
+    </gazebo>
+    <!-- IMU Sensor Plugin -->
+    <gazebo reference="base_link">
+      <sensor name='sensor_imu' type='imu'>
+        <always_on> 1 </always_on>
+        <update_rate> 100 </update_rate>
+        <pose> 0 0 0 0 0 0 </pose>
+        <plugin name='ros_imu' filename='libplugin_ros_imu.so'>
+        </plugin> 
+        <imu>
+          <noise>
+              <type>gaussian</type>
+            <rate>
+              <mean> 0 </mean>
+              <stddev> 0 </stddev>
+            </rate>
+            <accel>
+              <mean> 0 </mean>
+              <stddev> 0.00 </stddev>
+            </accel>
+          </noise>
+        </imu>
+      </sensor>
+    </gazebo>
+    
+  </xacro:macro>
+</robot>
+

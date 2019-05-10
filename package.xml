@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>dji_m100_description</name>
+  <version>0.0.0</version>
+  <description>The dji_m100_description package. Meshes are taken from https://github.com/caochao39/hku_m100_description.</description>
+
+  <maintainer email="tahsincankose@gmail.com">Tahsincan Kose</maintainer>
+
+
+  <license>MIT</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+  <export>
+  </export>
+</package>
