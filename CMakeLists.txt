@@ -4,6 +4,7 @@ project(dji_m100_description)
 find_package(catkin REQUIRED)
 
 catkin_package(
+	CATKIN_DEPENDS dji_m100_gazebo
 )
 if(CMAKE_RELEASE_PREFIX STREQUAL "release")
 	SET(CMAKE_INSTALL_PREFIX /opt/ros/$ENV{ROS_DISTRO})

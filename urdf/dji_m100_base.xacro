@@ -68,30 +68,6 @@
         <motionDriftNoiseTime>0.0</motionDriftNoiseTime>
       </plugin>
     </gazebo>
-    <!-- IMU Sensor Plugin -->
-    <gazebo reference="base_link">
-      <sensor name='sensor_imu' type='imu'>
-        <always_on> 1 </always_on>
-        <update_rate> 100 </update_rate>
-        <pose> 0 0 0 0 0 0 </pose>
-        <plugin name='ros_imu' filename='libplugin_ros_imu.so'>
-        </plugin> 
-        <imu>
-          <noise>
-              <type>gaussian</type>
-            <rate>
-              <mean> 0 </mean>
-              <stddev> 0 </stddev>
-            </rate>
-            <accel>
-              <mean> 0 </mean>
-              <stddev> 0.00 </stddev>
-            </accel>
-          </noise>
-        </imu>
-      </sensor>
-    </gazebo>
-    
   </xacro:macro>
 </robot>
 
