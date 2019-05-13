@@ -28,19 +28,10 @@
       </collision>
       <gravity>1</gravity>
     </link>
-    <!-- Ground truth plugin for debugging purposes -->
-    <!--gazebo>
-        <plugin name="groundtruth_sim" filename="libgazebo_ros_p3d.so">
-            <updateRate>100.0</updateRate>
-            <bodyName>base_link</bodyName>
-            <topicName>ground_truth/state</topicName>
-            <gaussianNoise>0.0</gaussianNoise>
-            <frameName>$(arg world_frame)</frameName>
-        </plugin>
-    </gazebo-->
     <!-- DJI Gazebo Controller Plugin -->
     <gazebo>
       <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control.so'>
+        <mode>1</mode> <!-- 0 is XYZ, 1 is GPS -->
         <bodyName>base_link</bodyName>
         <imuTopic>dji_sdk/imu</imuTopic>
         <rollpitchProportionalGain>10.0</rollpitchProportionalGain>
