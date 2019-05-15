@@ -3,7 +3,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:macro name="dji_m100_gimbal">
         <joint name="virtual_gimbal_joint" type="fixed">
-            <origin xyz="0.1 0 -0.04" rpy="0 0 0"/>
+            <origin xyz="-0.1 0 -0.04" rpy="0 0 0"/>
             <parent link="base_link"/>
             <child link="virtual_gimbal_link"/>
         </joint>
@@ -74,17 +74,17 @@
         <link name="gimbal_yaw_link">
             <inertial>
                 <mass value="0.0001" />
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0 0" rpy="0 0 ${-M_PI}" />
                 <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
             </inertial>
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0 0" rpy="0 0 ${-M_PI}" />
                 <geometry>
                 <mesh filename="package://dji_m100_description/meshes/dji_m100/gimbal.dae"/>
                 </geometry>
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0 0" rpy="0 0 ${-M_PI}" />
                 <geometry>
                 <mesh filename="package://dji_m100_description/meshes/dji_m100/gimbal.stl"/>
                 </geometry>
@@ -116,7 +116,7 @@
                 <camera>
                 <!-- <pose>0.027 0 -0.027 0 1.57 0</pose> -->
                 <!-- <pose>0.027 0 -0.027 0 1.57 0</pose> -->
-                <pose>0.027 0 -0.027 0 0 0</pose>
+                <pose>0.107 0 -0.127 0 0 0</pose>
                 <horizontal_fov>${94 * M_PI/180.0}</horizontal_fov>
                 <image>
                     <format>R8G8B8</format>

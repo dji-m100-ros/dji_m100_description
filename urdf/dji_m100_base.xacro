@@ -31,32 +31,6 @@
     <!-- DJI Gazebo Controller Plugin -->
     <gazebo>
       <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control.so'>
-        <mode>1</mode> <!-- 0 is XYZ, 1 is GPS -->
-        <bodyName>base_link</bodyName>
-        <imuTopic>dji_sdk/imu</imuTopic>
-        <rollpitchProportionalGain>10.0</rollpitchProportionalGain>
-        <rollpitchDifferentialGain>5.0</rollpitchDifferentialGain>
-        <rollpitchLimit>0.5</rollpitchLimit>
-        <yawProportionalGain>2.0</yawProportionalGain>
-        <yawDifferentialGain>1.0</yawDifferentialGain>
-        <yawLimit>1.5</yawLimit>
-        <velocityXYProportionalGain>5.0</velocityXYProportionalGain>
-        <velocityXYDifferentialGain>2.3</velocityXYDifferentialGain>
-        <velocityXYLimit>2</velocityXYLimit>
-        <velocityZProportionalGain>5.0</velocityZProportionalGain>
-        <velocityZDifferentialGain>1.0</velocityZDifferentialGain>
-        <velocityZLimit>-1</velocityZLimit>
-        <positionXYProportionalGain>1.1</positionXYProportionalGain>
-        <positionXYDifferentialGain>0.0</positionXYDifferentialGain>
-        <positionXYIntegralGain>0.0</positionXYIntegralGain>
-        <positionXYLimit>5</positionXYLimit>
-        <positionZProportionalGain>1.0</positionZProportionalGain>
-        <positionZDifferentialGain>0.2</positionZDifferentialGain>
-        <positionZLimit>-1</positionZLimit>
-        <maxForce>30</maxForce>
-        <motionSmallNoise>0.0</motionSmallNoise>
-        <motionDriftNoise>0.0</motionDriftNoise>
-        <motionDriftNoiseTime>0.0</motionDriftNoiseTime>
       </plugin>
     </gazebo>
   </xacro:macro>
