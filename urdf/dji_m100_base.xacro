@@ -31,6 +31,7 @@
     <!-- DJI Gazebo Controller Plugin -->
     <gazebo>
       <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control.so'>
+        <allow_contact_sensing>false</allow_contact_sensing> <!-- If you want to enable contact sensing make it true -->
       </plugin>
     </gazebo>
     <!-- Contact sensor -->
