@@ -33,6 +33,19 @@
       <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control.so'>
       </plugin>
     </gazebo>
+    <!-- Contact sensor -->
+    <gazebo reference="base_link">
+      <sensor name="body_contact_sensor" type="contact">
+        <always_on>true</always_on>
+        <contact>
+          <collision>base_link_collision</collision>
+        </contact>
+        <plugin name="dji_m100_bumper" filename="libgazebo_ros_bumper.so">
+          <bumperTopicName>contact</bumperTopicName>
+          <frameName>base_link</frameName>
+        </plugin>
+      </sensor>
+    </gazebo>
   </xacro:macro>
 </robot>
 
