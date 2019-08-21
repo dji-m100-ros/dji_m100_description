@@ -28,10 +28,11 @@
                 </geometry>
             </collision>
         </link>
-        <joint name="gimbal_roll_joint" type="continuous">
+        <joint name="gimbal_roll_joint" type="revolute">
             <parent link="virtual_gimbal_link" />
             <child link="gimbal_roll_link" />
             <axis xyz="1 0 0" />
+            <limit effort="1000.0" lower="-0.48" upper="0.48" velocity="0.5" />
             <dynamics damping="0.0" friction="0.0" />
         </joint>
         <link name="gimbal_roll_link">
@@ -47,10 +48,11 @@
             </visual>
         </link>
         
-        <joint name="gimbal_pitch_joint" type="continuous">
+        <joint name="gimbal_pitch_joint" type="revolute">
             <parent link="gimbal_roll_link" />
             <child link="gimbal_pitch_link" />
             <axis xyz="0 1 0" />
+            <limit effort="1000.0" lower="-0.48" upper="0.48" velocity="0.5" />
             <dynamics damping="0.0" friction="0.0" />
         </joint>
         <link name="gimbal_pitch_link">
@@ -69,6 +71,7 @@
             <parent link="gimbal_pitch_link" />
             <child link="gimbal_yaw_link" />
             <axis xyz="0 0 1" />
+            <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
             <dynamics damping="0.0" friction="0.0" />
         </joint>
         <link name="gimbal_yaw_link">
