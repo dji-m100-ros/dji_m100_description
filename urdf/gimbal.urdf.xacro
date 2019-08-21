@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find dji_m100_description)/urdf/gimbal_joints.xacro"/>
     <xacro:macro name="dji_m100_gimbal">
         <joint name="virtual_gimbal_joint" type="fixed">
             <origin xyz="-0.1 0 -0.04" rpy="0 0 0"/>
@@ -28,13 +29,15 @@
                 </geometry>
             </collision>
         </link>
-        <joint name="gimbal_roll_joint" type="revolute">
-            <parent link="virtual_gimbal_link" />
-            <child link="gimbal_roll_link" />
-            <axis xyz="1 0 0" />
-            <limit effort="1000.0" lower="-0.48" upper="0.48" velocity="0.5" />
-            <dynamics damping="0.0" friction="0.0" />
-        </joint>
+        
+        <revolute_gimbal_joint 
+            name="gimbal_roll_joint"
+            parent="virtual_gimbal_link"
+            child="gimbal_roll_link"
+            lower_limit="-0.48"
+            upper_limit="0.48"
+            axis_xyz="1 0 0"
+            />
         <link name="gimbal_roll_link">
             <inertial>
                 <mass value="0.0001" />
@@ -47,14 +50,15 @@
                 </geometry>
             </visual>
         </link>
-        
-        <joint name="gimbal_pitch_joint" type="revolute">
-            <parent link="gimbal_roll_link" />
-            <child link="gimbal_pitch_link" />
-            <axis xyz="0 1 0" />
-            <limit effort="1000.0" lower="-0.48" upper="0.48" velocity="0.5" />
-            <dynamics damping="0.0" friction="0.0" />
-        </joint>
+
+        <revolute_gimbal_joint 
+            name="gimbal_pitch_joint"
+            parent="gimbal_roll_link"
+            child="gimbal_pitch_link"
+            lower_limit="-0.48"
+            upper_limit="0.48"
+            axis_xyz="0 1 0"
+            />
         <link name="gimbal_pitch_link">
             <inertial>
                 <mass value="0.0001" />
@@ -67,13 +71,14 @@
                 </geometry>
             </visual>
         </link>
-        <joint name="gimbal_yaw_joint" type="continuous">
-            <parent link="gimbal_pitch_link" />
-            <child link="gimbal_yaw_link" />
-            <axis xyz="0 0 1" />
-            <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5" />
-            <dynamics damping="0.0" friction="0.0" />
-        </joint>
+        <revolute_gimbal_joint 
+            name="gimbal_yaw_joint"
+            parent="gimbal_pitch_link"
+            child="gimbal_yaw_link"
+            lower_limit="-3.14"
+            upper_limit="3.14"
+            axis_xyz="0 0 1"
+            />
         <link name="gimbal_yaw_link">
             <inertial>
                 <mass value="0.0001" />
