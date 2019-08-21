@@ -124,7 +124,7 @@
                 <camera>
                 <!-- <pose>0.027 0 -0.027 0 1.57 0</pose> -->
                 <!-- <pose>0.027 0 -0.027 0 1.57 0</pose> -->
-                <pose>0.107 0 -0.127 0 0 0</pose>
+                <pose>0.107 0 -0.227 0 0 ${M_PI}</pose>
                 <horizontal_fov>${94 * M_PI/180.0}</horizontal_fov>
                 <image>
                     <format>R8G8B8</format>
