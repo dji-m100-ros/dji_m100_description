@@ -11,9 +11,9 @@
   <xacro:macro name="dji_m100_base_macro">
     <link name="base_link">
       <inertial>
-        <mass value="1.477" />
+        <mass value="1024" />
         <origin xyz="0 0 0" />
-        <inertia ixx="0.11152" ixy="0.0" ixz="0.0" iyy="0.11152" iyz="0.0" izz="0.218" />
+        <inertia ixx="170.667" ixy="0.0" ixz="0.0" iyy="170.667" iyz="0.0" izz="170.667" />
       </inertial>
 
       <visual name="body">
@@ -59,9 +59,10 @@
         </plugin>
       </gazebo>
     </xacro:if>
+
     <xacro:unless value="$(arg hitl_model)">
       <gazebo reference="base_link">
-      <visual name="base_link::collision_sphere">
+        <visual name="base_link::collision_sphere">
           <material>
             <ambient>0 0 1 0.3</ambient>
             <diffuse>0 0 1 0.3</diffuse>
@@ -69,6 +70,9 @@
             <emissive>0 0 0 0.3</emissive>
           </material>
         </visual>
+      </gazebo>
+      <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
       </gazebo>
     </xacro:unless>
     <!-- Contact sensor -->
