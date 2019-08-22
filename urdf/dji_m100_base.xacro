@@ -2,7 +2,9 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:property name="pi" value="3.1415926535897931" />
+  <xacro:arg name="hitl_model" default="true"/>
+  <xacro:arg name="collision_enabled" default="false"/>
+
   <xacro:property name="M_PI" value="3.1415926535897931" />
 
  <!-- Base quadrotor link -->
@@ -14,10 +16,16 @@
         <inertia ixx="0.11152" ixy="0.0" ixz="0.0" iyy="0.11152" iyz="0.0" izz="0.218" />
       </inertial>
 
-      <visual>
+      <visual name="body">
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <mesh filename="package://dji_m100_description/meshes/dji_m100/dji_m100.dae"/>
+        </geometry>
+      </visual>
+      <visual name="base_link::collision_sphere">
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <geometry>
+          <sphere radius="0.75"/>
         </geometry>
       </visual>
       <collision>
@@ -28,12 +36,40 @@
       </collision>
       <gravity>1</gravity>
     </link>
-    <!-- DJI Gazebo Controller Plugin -->
-    <gazebo>
-      <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control.so'>
-        <allow_contact_sensing>false</allow_contact_sensing> <!-- If you want to enable contact sensing make it true -->
-      </plugin>
-    </gazebo>
+
+    <!-- HITL model config -->
+    <xacro:if value="$(arg hitl_model)">
+      <!-- Add illustrative transparent sphere around the drone -->
+      <gazebo reference="base_link">
+        <visual name="base_link::collision_sphere">
+          <material>
+            <ambient>1 0 0 0.3</ambient>
+            <diffuse>1 0 0 0.3</diffuse>
+            <specular>1 0 0 0.3</specular>
+            <emissive>0 0 0 0.3</emissive>
+          </material>
+        </visual>
+      </gazebo>
+
+      <!-- DJI Gazebo Controller Plugin -->
+      <gazebo>
+        <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control.so'>
+          <allow_contact_sensing>$(arg collision_enabled)</allow_contact_sensing> <!-- If you want to enable contact sensing make it true -->
+        </plugin>
+      </gazebo>
+    </xacro:if>
+    <xacro:unless value="$(arg hitl_model)">
+      <gazebo reference="base_link">
+      <visual name="base_link::collision_sphere">
+          <material>
+            <ambient>0 0 1 0.3</ambient>
+            <diffuse>0 0 1 0.3</diffuse>
+            <specular>0 0 1 0.3</specular>
+            <emissive>0 0 0 0.3</emissive>
+          </material>
+        </visual>
+      </gazebo>
+    </xacro:unless>
     <!-- Contact sensor -->
     <gazebo reference="base_link">
       <sensor name="body_contact_sensor" type="contact">
@@ -47,6 +83,7 @@
         </plugin>
       </sensor>
     </gazebo>
+
   </xacro:macro>
 </robot>
 
