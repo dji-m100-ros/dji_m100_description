@@ -1,12 +1,13 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:macro name="revolute_gimbal_joint" params="name axis_xyz parent child upper_limit lower_limit">
+    <xacro:macro name="revolute_gimbal_joint" params="name axis_xyz parent child upper_limit lower_limit origin_xyz">
         <joint name="${name}" type="revolute">
             <parent link="${parent}" />
             <child link="${child}" />
             <axis xyz="${axis_xyz}" />
-            <limit effort="1000.0" lower="${lower_limit}" upper="${upper_limit}" velocity="0.5" />
+            <limit effort="1000.0" lower="${lower_limit}" upper="${upper_limit}" velocity="1.5" />
             <dynamics damping="0.0" friction="0.0" />
+            <origin xyz="${origin_xyz}" rpy="0 0 0"/>
         </joint>
     </xacro:macro> 
 </robot>

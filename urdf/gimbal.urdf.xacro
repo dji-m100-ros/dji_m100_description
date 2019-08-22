@@ -2,51 +2,37 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find dji_m100_description)/urdf/gimbal_joints.xacro"/>
+    
     <xacro:macro name="dji_m100_gimbal">
-        <joint name="virtual_gimbal_joint" type="fixed">
-            <origin xyz="-0.1 0 -0.04" rpy="0 0 0"/>
-            <parent link="base_link"/>
-            <child link="virtual_gimbal_link"/>
-        </joint>
-        <gazebo reference="virtual_gimbal_joint">
-            <preserveFixedJoint>true</preserveFixedJoint>
-        </gazebo>
-        <link name="virtual_gimbal_link">
-            <inertial>
-                <mass value="0.0001" />
-                <origin xyz="0 0 0" rpy="0 0 0" />
-                <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
-            </inertial>
-            <visual>
-                <geometry>
-                <box size="0.0001 0.0001 0.0001" />
-                </geometry>
-            </visual>
-            <collision>
-                <origin xyz="0 0 0" rpy="0 0 0" />
-                <geometry>
-                <mesh filename="package://dji_m100_description/meshes/dji_m100/gimbal.stl"/>
-                </geometry>
-            </collision>
-        </link>
-        
         <revolute_gimbal_joint 
             name="gimbal_roll_joint"
-            parent="virtual_gimbal_link"
+            parent="base_link"
             child="gimbal_roll_link"
             lower_limit="-0.48"
             upper_limit="0.48"
             axis_xyz="1 0 0"
+            origin_xyz="-0.1 0 -0.04"
             />
+        <transmission name="trans_roll">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="gimbal_roll_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="motor_roll">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
         <link name="gimbal_roll_link">
             <inertial>
-                <mass value="0.0001" />
-                <origin xyz="0 0 0" rpy="0 0 0" />
-                <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+                <mass value="0.1" />
+                <origin xyz="-0.1 0 -0.04" rpy="0 0 0" />
+                <inertia ixx="0.0" ixy="0" ixz="0" iyy="0.0" iyz="0" izz="0.0" />
             </inertial>
             <visual>
                 <geometry>
-                <box size="0.0001 0.0001 0.0001" />
+                    <box size="0.0001 0.0001 0.0001" />
                 </geometry>
             </visual>
         </link>
@@ -58,12 +44,24 @@
             lower_limit="-0.48"
             upper_limit="0.48"
             axis_xyz="0 1 0"
+            origin_xyz="0 0 0"
             />
+        <transmission name="trans_pitch">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="gimbal_pitch_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="motor_pitch">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
         <link name="gimbal_pitch_link">
             <inertial>
-                <mass value="0.0001" />
+                <mass value="0.1" />
                 <origin xyz="0 0 0" rpy="0 0 0" />
-                <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+                <inertia ixx="0.0" ixy="0" ixz="0" iyy="0.0" iyz="0" izz="0.0" />
             </inertial>
             <visual>
                 <geometry>
@@ -78,17 +76,29 @@
             lower_limit="-3.14"
             upper_limit="3.14"
             axis_xyz="0 0 1"
+            origin_xyz="0 0 0"
             />
+        <transmission name="trans_yaw">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="gimbal_yaw_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="motor_yaw">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
         <link name="gimbal_yaw_link">
             <inertial>
-                <mass value="0.0001" />
+                <mass value="0.1" />
                 <origin xyz="0 0 0" rpy="0 0 ${-M_PI}" />
-                <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+                <inertia ixx="0.0" ixy="0" ixz="0" iyy="0.0" iyz="0" izz="0.0" />
             </inertial>
             <visual>
                 <origin xyz="0 0 0" rpy="0 0 ${-M_PI}" />
                 <geometry>
-                <mesh filename="package://dji_m100_description/meshes/dji_m100/gimbal.dae"/>
+                    <mesh filename="package://dji_m100_description/meshes/dji_m100/gimbal.dae"/>
                 </geometry>
             </visual>
             <collision>
