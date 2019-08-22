@@ -55,6 +55,7 @@
       <gazebo>
         <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control.so'>
           <allow_contact_sensing>$(arg collision_enabled)</allow_contact_sensing> <!-- If you want to enable contact sensing make it true -->
+          <initial_height>1.0</initial_height>
         </plugin>
       </gazebo>
     </xacro:if>
