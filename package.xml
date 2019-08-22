@@ -12,6 +12,10 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <exec_depend>dji_m100_gazebo</exec_depend>
+  <depend>urdf</depend>
+  <depend>controller_manager</depend>
+  <depend>joint_state_controller</depend>
+  <depend>robot_state_publisher</depend>
   <export>
   </export>
 </package>
