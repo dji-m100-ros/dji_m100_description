@@ -16,7 +16,7 @@
         <inertia ixx="170.667" ixy="0.0" ixz="0.0" iyy="170.667" iyz="0.0" izz="170.667" />
       </inertial>
 
-      <visual name="base_link::body">
+      <visual name="body">
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <mesh filename="package://dji_m100_description/meshes/dji_m100/dji_m100.dae"/>
@@ -53,7 +53,7 @@
 
       <!-- DJI Gazebo Controller Plugin -->
       <gazebo>
-        <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control.so'>
+        <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control_hitl.so'>
           <allow_contact_sensing>$(arg collision_enabled)</allow_contact_sensing> <!-- If you want to enable contact sensing make it true -->
           <initial_height>1.0</initial_height>
         </plugin>
@@ -72,7 +72,9 @@
         </visual>
       </gazebo>
       <gazebo>
-        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
+        <plugin name="sitl_controller" filename="libgazebo_ros_control.so">
+          <controlPeriod>0.01</controlPeriod>
+        </plugin>
       </gazebo>
     </xacro:unless>
     <!-- Contact sensor -->
