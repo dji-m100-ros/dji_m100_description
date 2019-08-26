@@ -5,9 +5,19 @@
             <parent link="${parent}" />
             <child link="${child}" />
             <axis xyz="${axis_xyz}" />
-            <limit effort="1000.0" lower="${lower_limit}" upper="${upper_limit}" velocity="1.5" />
+            <limit effort="1000.0" lower="${lower_limit}" upper="${upper_limit}" velocity="2.5" />
             <dynamics damping="0.0" friction="0.0" />
             <origin xyz="${origin_xyz}" rpy="0 0 0"/>
         </joint>
+        <transmission name="trans_${name}">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${name}">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${name}">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
     </xacro:macro> 
 </robot>

@@ -13,16 +13,6 @@
             axis_xyz="1 0 0"
             origin_xyz="-0.1 0 -0.04"
             />
-        <transmission name="trans_roll">
-            <type>transmission_interface/SimpleTransmission</type>
-            <joint name="gimbal_roll_joint">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            </joint>
-            <actuator name="motor_roll">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-                <mechanicalReduction>1</mechanicalReduction>
-            </actuator>
-        </transmission>
 
         <link name="gimbal_roll_link">
             <inertial>
@@ -46,16 +36,6 @@
             axis_xyz="0 1 0"
             origin_xyz="0 0 0"
             />
-        <transmission name="trans_pitch">
-            <type>transmission_interface/SimpleTransmission</type>
-            <joint name="gimbal_pitch_joint">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            </joint>
-            <actuator name="motor_pitch">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-                <mechanicalReduction>1</mechanicalReduction>
-            </actuator>
-        </transmission>
 
         <link name="gimbal_pitch_link">
             <inertial>
@@ -78,16 +58,6 @@
             axis_xyz="0 0 1"
             origin_xyz="0 0 0"
             />
-        <transmission name="trans_yaw">
-            <type>transmission_interface/SimpleTransmission</type>
-            <joint name="gimbal_yaw_joint">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-            </joint>
-            <actuator name="motor_yaw">
-                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-                <mechanicalReduction>1</mechanicalReduction>
-            </actuator>
-        </transmission>
 
         <link name="gimbal_yaw_link">
             <inertial>
