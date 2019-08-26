@@ -1,3 +1,10 @@
+dji_m100_gimbal:
+  hardware_interface:
+    joints:
+      - gimbal_roll_joint
+      - gimbal_pitch_joint
+      - gimbal_yaw_joint
+
 # Publish all joint states
 joint_state_controller:
   type: joint_state_controller/JointStateController
