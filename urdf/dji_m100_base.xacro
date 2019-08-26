@@ -16,7 +16,7 @@
         <inertia ixx="170.667" ixy="0.0" ixz="0.0" iyy="170.667" iyz="0.0" izz="170.667" />
       </inertial>
 
-      <visual name="body">
+      <visual name="base_link::body">
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
           <mesh filename="package://dji_m100_description/meshes/dji_m100/dji_m100.dae"/>
