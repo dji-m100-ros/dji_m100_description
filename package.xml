@@ -14,7 +14,7 @@
   
   <exec_depend>joint_state_controller</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>dji_m100_controller_gazebo</exec_depend>
+  <exec_depend>dji_m100_controllers_gazebo</exec_depend>
   <export>
   </export>
 </package>

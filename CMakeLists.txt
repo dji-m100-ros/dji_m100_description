@@ -7,7 +7,7 @@ catkin_package(
 	CATKIN_DEPENDS 
 	joint_state_controller
 	robot_state_publisher
-	dji_m100_controller_gazebo
+	dji_m100_controllers_gazebo
 )
 if(CMAKE_RELEASE_PREFIX STREQUAL "release")
 	SET(CMAKE_INSTALL_PREFIX /opt/ros/$ENV{ROS_DISTRO})
