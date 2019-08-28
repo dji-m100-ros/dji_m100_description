@@ -53,7 +53,7 @@
 
       <!-- DJI Gazebo Controller Plugin -->
       <gazebo>
-        <plugin name='dji_ros_gazebo_controller' filename='libdji_ros_gazebo_control_hitl.so'>
+        <plugin name='hitl_controller' filename='libdji_m100_controller_gazebo_hitl.so'>
           <allow_contact_sensing>$(arg collision_enabled)</allow_contact_sensing> <!-- If you want to enable contact sensing make it true -->
           <initial_height>1.0</initial_height>
         </plugin>
@@ -74,7 +74,7 @@
       <gazebo>
         <plugin name="sitl_controller" filename="libgazebo_ros_control.so">
           <controlPeriod>0.01</controlPeriod>
-          <robotSimType>dji_m100_controller_gazebo/DJIM100HardwareSim</robotSimType>
+          <robotSimType>dji_m100_controller_gazebo_sitl/DJIM100HardwareSim</robotSimType>
         </plugin>
       </gazebo>
     </xacro:unless>

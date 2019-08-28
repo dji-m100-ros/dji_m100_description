@@ -1,15 +1,13 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(dji_m100_description)
 
-find_package(catkin REQUIRED COMPONENTS
-	urdf
-	controller_manager
-	joint_state_controller
-	robot_state_publisher
-)
+find_package(catkin REQUIRED)
 
 catkin_package(
-	CATKIN_DEPENDS dji_m100_gazebo
+	CATKIN_DEPENDS 
+	joint_state_controller
+	robot_state_publisher
+	dji_m100_controller_gazebo
 )
 if(CMAKE_RELEASE_PREFIX STREQUAL "release")
 	SET(CMAKE_INSTALL_PREFIX /opt/ros/$ENV{ROS_DISTRO})
