@@ -2,9 +2,9 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find dji_m100_description)/urdf/gimbal_joints.xacro"/>
-    
+
     <xacro:macro name="dji_m100_gimbal">
-        <revolute_gimbal_joint 
+        <revolute_gimbal_joint
             name="gimbal_roll_joint"
             parent="base_link"
             child="gimbal_roll_link"
@@ -27,7 +27,7 @@
             </visual>
         </link>
 
-        <revolute_gimbal_joint 
+        <revolute_gimbal_joint
             name="gimbal_pitch_joint"
             parent="gimbal_roll_link"
             child="gimbal_pitch_link"
@@ -49,7 +49,7 @@
                 </geometry>
             </visual>
         </link>
-        <revolute_gimbal_joint 
+        <revolute_gimbal_joint
             name="gimbal_yaw_joint"
             parent="gimbal_pitch_link"
             child="gimbal_yaw_link"
@@ -97,7 +97,7 @@
         </gazebo>
         <link name="camera_optical_frame">
         </link>
-        
+
         <gazebo reference="gimbal_yaw_link">
             <sensor type="camera" name="camera_camera_sensor">
                 <update_rate>10</update_rate>
@@ -121,7 +121,7 @@
                 <cameraName>camera</cameraName>
                 <alwaysOn>true</alwaysOn>
                 <updateRate>10</updateRate>
-                
+
                 <imageTopicName>dji_sdk/image_raw</imageTopicName>
                 <cameraInfoTopicName>dji_sdk/camera_info</cameraInfoTopicName>
                 <frameName>camera_optical_frame</frameName>

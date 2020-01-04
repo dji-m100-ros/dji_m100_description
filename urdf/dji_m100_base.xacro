@@ -116,7 +116,7 @@
         </plugin>
       </sensor>
     </gazebo>
-    
+
     <gazebo>
       <plugin name="ground_truth_plugin" filename="libgazebo_ros_p3d.so">
         <robotNamespace>/${namespace}</robotNamespace>
@@ -124,7 +124,7 @@
         <topicName>pose_gt</topicName>
         <frameName>/world</frameName>
         <gaussianNoise>0</gaussianNoise>
-        <updateRate>2</updateRate>
+        <updateRate>10</updateRate>
       </plugin>
     </gazebo>
   </xacro:macro>
