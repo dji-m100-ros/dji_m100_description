@@ -75,6 +75,7 @@
         <plugin name="sitl_controller" filename="libgazebo_ros_control.so">
           <controlPeriod>0.01</controlPeriod>
           <robotSimType>dji_m100_controller_gazebo_sitl/DJIM100HardwareSim</robotSimType>
+          <allow_contact_sensing>$(arg collision_enabled)</allow_contact_sensing>
         </plugin>
       </gazebo>
       <!-- Battery -->
