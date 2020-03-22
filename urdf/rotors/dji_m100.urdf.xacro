@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 
 <robot name="dji_m100" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:include filename="$(find rotors_description)/urdf/component_snippets.xacro" />
   <!-- Instantiate dji_m100 "mechanics" -->
-  <xacro:include filename="$(find dji_m100_description)/urdf/rotors/dji_m100_base.xacro" />
-
+  <xacro:include filename="$(find dji_m100_description)/urdf/dji_m100_base.xacro" />
+  <xacro:dji_m100_body />
 </robot>
