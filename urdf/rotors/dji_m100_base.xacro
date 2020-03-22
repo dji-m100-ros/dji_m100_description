@@ -2,7 +2,7 @@
 
 <robot name="dji_m100" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- Properties -->
-  <xacro:property name="namespace" value="$(arg namespace)" />
+  <xacro:property name="namespace" value="$(arg robot_namespace)" />
   <xacro:property name="rotor_velocity_slowdown_sim" value="10" />
   <xacro:property name="use_mesh_file" value="true" />
   <xacro:property name="mesh_file" value="package://dji_m100_description/meshes/dji_m100/dji_m100_flipped_rotorless.dae" />
@@ -136,13 +136,27 @@
     <xacro:insert_block name="rotor_inertia" />
   </xacro:vertical_rotor>
   <gazebo>
-    <plugin name="ground_truth_plugin" filename="libgazebo_ros_p3d.so">
+    <!-- Possibly noisy odometry sensor attached to the robot-->
+    <plugin name="odometry_sensor_plugin" filename="libgazebo_ros_p3d.so">
+      <robotNamespace>/${namespace}</robotNamespace>
       <bodyName>${namespace}/base_link</bodyName>
       <topicName>odometry</topicName>
       <frameName>/world</frameName>
-      <gaussianNoise>0</gaussianNoise>
-      <updateRate>10</updateRate>
+      <gaussianNoise>0.01</gaussianNoise>
+      <updateRate>50</updateRate>
+    </plugin>
+    <!-- Possibly noisy IMU sensor attached to the robot-->
+    <plugin name="imu_sensor_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>${namespace}/base_link</bodyName>
+      <topicName>imu</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>0.01</gaussianNoise>
+      <updateRate>50</updateRate>
     </plugin>
   </gazebo>
+
+  <!-- Instantiate a controller. -->
+  <xacro:controller_plugin_macro namespace="${namespace}" imu_sub_topic="imu" />
 
 </robot>
