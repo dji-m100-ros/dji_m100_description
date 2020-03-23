@@ -168,7 +168,16 @@
       </xacro:if>
       <!-- Instantiate a controller. -->
       <xacro:if value="$(arg rotors_controlled)">
-        <xacro:controller_plugin_macro namespace="${namespace}" imu_sub_topic="imu" />
+        <gazebo>
+          <plugin name="rotors_controller_interface" filename="librotors_gazebo_controller_interface.so">
+            <robotNamespace>${namespace}</robotNamespace>
+            <commandAttitudeThrustSubTopic>command/attitude</commandAttitudeThrustSubTopic>
+            <commandRateThrustSubTopic>command/rate</commandRateThrustSubTopic>
+            <commandMotorSpeedSubTopic>command/motor_speed</commandMotorSpeedSubTopic>
+            <imuSubTopic>imu</imuSubTopic>
+            <motorSpeedCommandPubTopic>gazebo/command/motor_speed</motorSpeedCommandPubTopic>
+          </plugin>
+        </gazebo>
       </xacro:if>
       <xacro:unless value="$(arg rotors_controlled)">
         <gazebo>
