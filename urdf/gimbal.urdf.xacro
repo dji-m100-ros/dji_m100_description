@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find dji_m100_description)/urdf/gimbal_joints.xacro"/>
-
+    <xacro:property name="M_PI" value="3.14"/>
     <xacro:macro name="dji_m100_gimbal">
         <revolute_gimbal_joint
             name="gimbal_roll_joint"
