@@ -9,8 +9,6 @@
   <!-- Properties -->
   <xacro:property name="rotor_velocity_slowdown_sim" value="10" />
   <xacro:property name="mass" value="2.355" /> <!-- [kg] -->
-  <xacro:property name="body_width" value="0.3" /> <!-- [m] / This value is not important since we've already provided the mesh. -->
-  <xacro:property name="body_height" value="0.16" /> <!-- [m] / This value is not important since we've already provided the mesh. -->
   <xacro:property name="mass_rotor" value="0.08" /> <!-- [kg] -->
   <xacro:property name="arm_length" value="0.17" /> <!-- [m] -->
   <xacro:property name="rotor_offset_top" value="0.1" /> <!-- [m] -->
