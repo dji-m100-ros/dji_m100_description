@@ -1,15 +1,19 @@
 <launch>
     <arg name="model" default="$(find dji_m100_description)/urdf/dji_m100.urdf.xacro"/>
-    
+    <arg name="name" default="dji_m100"/>
 
-    <arg name="tf_prefix" default="$(optenv ROS_NAMESPACE)"/>
     <arg name="world_frame" default="/world"/>
-    <arg name="base_link_frame" default="$(arg tf_prefix)/base_link"/>
-    
-    <param name="robot_description" command="$(find xacro)/xacro '$(arg model)' base_link_frame:=$(arg base_link_frame) world_frame:=$(arg world_frame)" />
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+    <param name="robot_description"
+          command="$(find xacro)/xacro '$(arg model)'
+                      world_frame:=$(arg world_frame)
+                      robot_namespace:=$(arg name)
+                      hitl_model:=false
+                      rotors_controlled:=true
+                      complex_visualization_supported:=false"/>
 
-    <node name="rviz" pkg="rviz" type="rviz"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find dji_m100_description)/cfg/dji_m100.rviz"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
         <param name="use_gui" value="True"/>
     </node>
