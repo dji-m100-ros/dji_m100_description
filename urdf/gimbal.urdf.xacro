@@ -3,22 +3,50 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="$(find dji_m100_description)/urdf/gimbal_joints.xacro"/>
     <xacro:property name="M_PI" value="3.14"/>
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
     <xacro:macro name="dji_m100_gimbal">
-        <revolute_gimbal_joint
+        <joint name="gimbal_base_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="gimbal_base_plate" />
+        </joint>
+        <gazebo reference="gimbal_base_joint">
+            <preserveFixedJoint>true</preserveFixedJoint>
+        </gazebo>
+        <link name="gimbal_base_plate">
+            <visual>
+                <geometry>
+                    <box size="0.01 0.01 0.06"/>
+                </geometry>
+                <origin xyz="0.0 0 -0.03" rpy="0 ${-75 * M_PI/180.0} 0"/>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="0.01 0.01 0.06"/>
+                </geometry>
+                <origin xyz="0.0 0 -0.03" rpy="0 ${-75 * M_PI/180.0} 0"/>
+            </collision>
+            <inertial>
+                <mass value="0.01"/>
+                <inertia ixx="0.0000125" ixy="0.0" ixz="0.0" iyy="0.0000125" iyz="0.0" izz="0.0000125"/>
+            </inertial>
+        </link>
+         <revolute_gimbal_joint
             name="gimbal_roll_joint"
-            parent="base_link"
+            parent="gimbal_base_plate"
             child="gimbal_roll_link"
             lower_limit="-0.48"
             upper_limit="0.48"
             axis_xyz="1 0 0"
-            origin_xyz="-0.1 0 -0.04"
+            origin_xyz="0.05 0 -0.04"
             />
-
         <link name="gimbal_roll_link">
             <inertial>
-                <mass value="0.1" />
-                <origin xyz="-0.1 0 -0.04" rpy="0 0 0" />
-                <inertia ixx="0.0" ixy="0" ixz="0" iyy="0.0" iyz="0" izz="0.0" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.01"/>
+                <inertia ixx="0.0000125" ixy="0.0" ixz="0.0" iyy="0.0000125" iyz="0.0" izz="0.0000125"/>
             </inertial>
             <visual>
                 <geometry>
@@ -39,9 +67,9 @@
 
         <link name="gimbal_pitch_link">
             <inertial>
-                <mass value="0.1" />
                 <origin xyz="0 0 0" rpy="0 0 0" />
-                <inertia ixx="0.0" ixy="0" ixz="0" iyy="0.0" iyz="0" izz="0.0" />
+                <mass value="0.01"/>
+                <inertia ixx="0.0000125" ixy="0.0" ixz="0.0" iyy="0.0000125" iyz="0.0" izz="0.0000125"/>
             </inertial>
             <visual>
                 <geometry>
@@ -53,58 +81,37 @@
             name="gimbal_yaw_joint"
             parent="gimbal_pitch_link"
             child="gimbal_yaw_link"
-            lower_limit="-3.14"
-            upper_limit="3.14"
+            lower_limit="-1.57"
+            upper_limit="1.57"
             axis_xyz="0 0 1"
             origin_xyz="0 0 0"
             />
 
         <link name="gimbal_yaw_link">
             <inertial>
-                <mass value="0.1" />
-                <origin xyz="0 0 0" rpy="0 0 ${-M_PI}" />
-                <inertia ixx="0.0" ixy="0" ixz="0" iyy="0.0" iyz="0" izz="0.0" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.01"/>
+                <inertia ixx="0.0000125" ixy="0.0" ixz="0.0" iyy="0.0000125" iyz="0.0" izz="0.0000125"/>
             </inertial>
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 ${-M_PI}" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
                     <mesh filename="package://dji_m100_description/meshes/dji_m100/gimbal.dae"/>
                 </geometry>
             </visual>
-            <collision>
-                <origin xyz="0 0 0" rpy="0 0 ${-M_PI}" />
-                <geometry>
-                <mesh filename="package://dji_m100_description/meshes/dji_m100/gimbal.stl"/>
-                </geometry>
-            </collision>
         </link>
-        <joint name="camera_joint" type="continuous">
-            <parent link="gimbal_yaw_link" />
-            <child link="camera_link" />
-            <axis xyz="0 0 1" />
-            <dynamics damping="0.0" friction="0.0" />
-        </joint>
-        <link name="camera_link">
-        </link>
-
-        <joint name="camera_optical_joint" type="fixed">
-            <origin xyz="0 0 0" rpy="${-M_PI/2} 0.0 ${-M_PI/2}" />
-            <parent link="camera_link" />
-            <child link="camera_optical_frame"/>
-        </joint>
-        <gazebo reference="camera_optical_joint">
-            <preserveFixedJoint>true</preserveFixedJoint>
+        <gazebo>
+            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            </plugin>
         </gazebo>
-        <link name="camera_optical_frame">
-        </link>
-
+        <gazebo reference="gimbal_base_plate">
+            <material>Gazebo/FlatBlack</material>
+        </gazebo>
         <gazebo reference="gimbal_yaw_link">
             <sensor type="camera" name="camera_camera_sensor">
                 <update_rate>10</update_rate>
                 <camera>
-                <!-- <pose>0.027 0 -0.027 0 1.57 0</pose> -->
-                <!-- <pose>0.027 0 -0.027 0 1.57 0</pose> -->
-                <pose>0.107 0 -0.227 0 0 ${M_PI}</pose>
+                <pose>0.107 0 -0.227 0 0 0</pose>
                 <horizontal_fov>${94 * M_PI/180.0}</horizontal_fov>
                 <image>
                     <format>R8G8B8</format>

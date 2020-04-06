@@ -5,7 +5,7 @@
             <parent link="${parent}" />
             <child link="${child}" />
             <axis xyz="${axis_xyz}" />
-            <limit effort="1000.0" lower="${lower_limit}" upper="${upper_limit}" velocity="2.5" />
+            <limit effort="0.005" lower="${lower_limit}" upper="${upper_limit}" velocity="0.2" />
             <dynamics damping="0.0" friction="0.0" />
             <origin xyz="${origin_xyz}" rpy="0 0 0"/>
         </joint>
